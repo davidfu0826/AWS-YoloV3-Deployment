@@ -45,13 +45,9 @@ def read_detection_results(output_txts):
     return results
 
 if __name__ == "__main__":
-    
-    path_to_dir_or_img = "C:/Users/Succe/OneDrive/Photo, Video and music/Pictures/240740560_156617623198297_7836862078333369339_n.jpg"
-    #output_img = "output/results/*.jpg"
-    output_txts = "output/results/labels/*.txt"
 
-    run_prediction(path_to_dir_or_img)
-    results = read_detection_results(output_txts)
-
+    run_prediction("data/input/orange.jpg")
+    results = read_detection_results("output/results/labels/*.txt")
+    print(results)
     # Clean
     shutil.rmtree("output/results/")
