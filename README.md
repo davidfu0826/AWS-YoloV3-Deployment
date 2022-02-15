@@ -1,4 +1,5 @@
 **Background**
+
 Yolov3 model:
 https://github.com/ultralytics/yolov3/tree/0f80f2f9054dd06d34c51e73ea1bc5ba808fed18
 
@@ -7,9 +8,11 @@ https://towardsdatascience.com/how-to-deploy-ml-models-using-flask-gunicorn-ngin
 
 
 **Prerequisites:**
+
 Docker installed
 
 **Usage:**
+
 Start server:
 ```
 git clone https://github.com/davidfu0826/AWS-YoloV3-Deployment.git
