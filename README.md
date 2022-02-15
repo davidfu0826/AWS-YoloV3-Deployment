@@ -15,13 +15,13 @@ Docker installed
 
 Start server:
 ```
-git clone https://github.com/davidfu0826/AWS-YoloV3-Deployment.git
-cd AWS-YoloV3-Deployment
-./run_docker.sh
+>> git clone https://github.com/davidfu0826/AWS-YoloV3-Deployment.git
+>> cd AWS-YoloV3-Deployment
+>> ./run_docker.sh
 ```
 
 Run image client:
 ```
-cd client
-python image_client.py
+>> cd client
+>> python image_client.py
 ```
