@@ -30,16 +30,12 @@ def run_request():
     img = img.save("data/input/image.jpg") # Save image to input path (for inference)
     
     run_prediction("data/input/image.jpg")
-    response = read_detection_results("output/results/labels/*.txt")
+    response = read_detection_results("data/input/image.jpg", "output/results/labels/*.txt", "yolov3/data/coco128.yaml")
 
-    # Clean
+    # Clean results
     shutil.rmtree("output/results/")
 
     # Return the processing result to the client
-    #response = {
-    #    "img_shape":img_shape        
-    #}
-
     return jsonify(response)
 
 

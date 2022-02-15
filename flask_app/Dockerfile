@@ -10,6 +10,7 @@ RUN git clone https://github.com/ultralytics/yolov3.git
 WORKDIR yolov3
 RUN git checkout 0f80f2f9054dd06d34c51e73ea1bc5ba808fed18
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install pyyaml
 WORKDIR /usr/src/flask_app
 COPY . .
 RUN python predict.py
