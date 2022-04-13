@@ -6,8 +6,6 @@ import yaml
 from PIL import Image
 
 def run_prediction(path_to_dir_or_img):
-    #subprocess.run(["python", "--version"])
-    #subprocess.run(["python", "yolov3/detect.py", "--help"])
     subprocess.run([
         "python", "yolov3/detect.py",
         "--source", path_to_dir_or_img, 
