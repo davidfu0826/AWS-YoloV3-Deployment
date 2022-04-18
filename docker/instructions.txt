@@ -1,0 +1,12 @@
+Source: https://github.com/aws/amazon-sagemaker-examples/tree/main/advanced_functionality/scikit_bring_your_own/container/decision_trees
+By 2022-04-18
+
+1. Build docker image and create a container.
+>> docker build -t container_name .
+>> docker run -p 3141:8080 container_name serve
+
+2. Go to the browser (on the host)
+https://localhost:3141/ping
+
+3. Try POST request
+>> curl -X POST localhost:3141/invocations
