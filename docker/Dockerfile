@@ -2,8 +2,9 @@ FROM python:3.8-slim-buster
 
 RUN apt-get -y update && apt-get install -y --no-install-recommends nginx
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# OpenCV dependencies
+RUN apt-get update
+RUN apt-get install ffmpeg libsm6 libxext6  -y
 
 # Set some environment variables. PYTHONUNBUFFERED keeps Python from buffering our standard
 # output stream, which means that logs can be delivered to the user quickly. PYTHONDONTWRITEBYTECODE
@@ -16,6 +17,11 @@ ENV PATH="/opt/program:${PATH}"
 
 COPY . /opt/program
 WORKDIR /opt/program
+
+RUN pip3 install -r requirements.txt
+RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+
+RUN git clone https://github.com/ultralytics/yolov3; cd yolov3; pip install -r requirements.txt
 
 #CMD [ "python3", "my_flask_app.py"]
 #ENTRYPOINT [ "gunicorn", "--bind", "0.0.0.0:5000", "wsgi:app" ]
