@@ -9,4 +9,4 @@ By 2022-04-18
 https://localhost:3141/ping
 
 3. Try POST request
->> curl -X POST localhost:3141/invocations
+>> curl -X POST localhost:5000/invocations -F "image=@path/to/image.jpg"

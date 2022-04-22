@@ -3,17 +3,19 @@ import numpy as np
 from flask import Flask, request
 from PIL import Image
 
-#from predict import run_prediction, read_detection_results
+from pathlib import Path
+import string
+import random
+
+
+from predict import run_prediction, read_detection_results
 
 model = None
 app = Flask(__name__)
+Path("data/input/").mkdir(exist_ok=True, parents=True)
 
-"""
-def load_model():
-    global model
-    with open('iris_trained_model.pkl', 'rb') as f:
-        model = pickle.load(f)
-"""
+def random_filename(length):
+    return ''.join(random.choice(string.ascii_letters) for _ in range(length))
 
 @app.route('/')
 def home_endpoint():
@@ -25,27 +27,22 @@ def ping_response():
 
 @app.route('/invocations', methods=['POST'])
 def get_prediction():
-    """
+
     if request.method == 'POST':
-        print(request.files)
-        #data = request.get_json()  # Get data posted as a json
-        #data = np.array(data)[np.newaxis, :]  # converts shape from (4,) to (1, 4)
-        image=request.files['media']
-        print(image)
+        print(request.files.keys())
+        image=request.files['image']
         pil_image = Image.open(image)
-        print(type(pil_image), pil_image)
-        pil_image.save("data/input/image.jpg")
+        img_name = random_filename(length=1)
+        pil_image.save(f"data/input/{img_name}.jpg")
 
-        run_prediction("data/input/image.jpg")
-        response = read_detection_results("data/input/image.jpg", "output/results/labels/*.txt", "yolov3/data/coco128.yaml")
-        #prediction = model.predict(data)  # runs globally loaded model on the data
+        # Run inference
+        run_prediction(f"data/input/{img_name}.jpg", output_dir=img_name) 
+
+        # Parse model output to json/dictionary
+        response = read_detection_results(f"data/input/{img_name}.jpg", f"output/results/{img_name}/labels/*.txt", "yolov3/data/coco128.yaml")
+
     return str(response)
-    """
-    return str({
-        "results": [1,2,3]
-    })
 
-#if __name__ == '__main__':
-#    #load_model()  # load model at the beginning once only
-#    app.run(host='0.0.0.0', port=8080)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
     

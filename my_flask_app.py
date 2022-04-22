@@ -30,7 +30,7 @@ def get_prediction():
         print(type(pil_image), pil_image)
         pil_image.save("data/input/image.jpg")
 
-        run_prediction("data/input/image.jpg")
+        run_prediction("data/input/image.jpg", )
         response = read_detection_results("data/input/image.jpg", "output/results/labels/*.txt", "yolov3/data/coco128.yaml")
         #prediction = model.predict(data)  # runs globally loaded model on the data
     return str(response)
